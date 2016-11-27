@@ -1,0 +1,1 @@
+settings_uri = 'calendar/render#settings-general_11'
