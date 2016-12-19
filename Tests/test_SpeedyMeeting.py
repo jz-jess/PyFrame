@@ -8,10 +8,9 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger()
 
-
+@pytest.mark.usefixtures("driver")
 class SpeedyMeetingTest(unittest.TestCase):
     def setUp(self):
-        self.driver = open_browser()
         self.event_length = str(get_setting('defaultEventLength'))
 
     def test(self):
@@ -31,7 +30,6 @@ class SpeedyMeetingTest(unittest.TestCase):
         self.calendar_page.go_to_settings_page(base_url() + settings_uri)
         self.settings_page.disable_speedy(self.changed_event_length)
         self.settings_page.save_changes()
-        self.driver.close()
 
 
 if __name__ == "__main__":

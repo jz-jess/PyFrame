@@ -4,10 +4,9 @@ from PageObjects.Pages.LoginPage import LoginPage
 from TestData.SettingsData import *
 from CalendarAPI import *
 
-
+@pytest.mark.usefixtures("driver")
 class WeekChangeTest(unittest.TestCase):
     def setUp(self):
-        self.driver = open_browser()
         self.week_start = str(get_setting('weekStart'))
 
     def test(self):
@@ -18,9 +17,6 @@ class WeekChangeTest(unittest.TestCase):
         changed_weekstart = settings_page.change_weekstart(self.week_start)
         settings_page.save_changes()
         calendar_page.assert_weekstart(changed_weekstart)
-
-    def tearDown(self):
-        self.driver.close()
 
 
 if __name__ == "__main__":

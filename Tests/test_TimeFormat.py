@@ -5,9 +5,9 @@ from TestData.SettingsData import *
 from CalendarAPI import *
 
 
+@pytest.mark.usefixtures("driver")
 class TimeFormatTest(unittest.TestCase):
     def setUp(self):
-        self.driver = open_browser()
         self.is_24hr = str(get_setting('format24HourTime'))
 
     def test(self):
