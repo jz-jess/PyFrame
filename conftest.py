@@ -28,7 +28,7 @@ def pytest_runtest_makereport(item, call):
         if (report.skipped and xfail) or (report.failed and not xfail):
             # only add additional html on failure
             test_func = _get_test_func(item.obj)
-            ss_path = take_failed_ss(test_func.driver)
+            ss_path = take_failed_ss(test_func.driver, item.name)
             extra.append(pytest_html.extras.html('<img src="%s">' % ss_path))
         report.extra = extra
 
@@ -59,17 +59,12 @@ def _get_test_func(obj):
     return obj
 
 
-def take_failed_ss(driver):
+def take_failed_ss(driver, name):
     curdir = os.getcwd()
-    directory = curdir + '/screenshots'
+    directory = curdir + '/screenshots/%s' % name
     if not os.path.exists(directory):
         os.makedirs(directory)
-    count = 1
-    while True:
-        if not os.path.exists(directory + '/img' + str(count) + '.png'):
-            ss_name = '/img' + str(count) + '.png'
-            break
-        count += 1
+    ss_name = '/img.png'
     driver.save_screenshot(directory + ss_name)
     return directory + ss_name
 
