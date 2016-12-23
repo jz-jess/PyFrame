@@ -17,14 +17,11 @@ class DefaultDurationTest(unittest.TestCase):
         calendar_page = loginpage.login(username(), password())
         settings_page = calendar_page.go_to_settings_page(base_url() + settings_uri)
         calendar_page = loginpage.login(username(), password())
-        # settings_page.change_default_duration(self.event_length)
+        settings_page.change_default_duration(self.event_length)
         settings_page.save_changes()
-        # changed_event_length = str(get_setting('defaultEventLength'))
-        # start_time, end_time = quick_add_event()
-        # settings_page.validate_default_length(start_time, end_time, changed_event_length)
-
-    # def tearDown(self):
-    #     self.driver.close()
+        changed_event_length = str(get_setting('defaultEventLength'))
+        start_time, end_time = quick_add_event()
+        settings_page.validate_default_length(start_time, end_time, changed_event_length)
 
 
 if __name__ == "__main__":

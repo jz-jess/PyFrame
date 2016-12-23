@@ -19,9 +19,6 @@ class TimeFormatTest(unittest.TestCase):
         settings_page.save_changes()
         calendar_page.assert_timings(format)
 
-    def tearDown(self):
-        self.driver.close()
-
 
 if __name__ == "__main__":
     unittest.main()

@@ -37,13 +37,10 @@ def pytest_runtest_makereport(item, call):
 def driver(request):
     browser = pytest.config.getoption('--browser')
     from selenium import webdriver
-
     if browser == 'chrome' or browser == 'Chrome':
         driver = webdriver.Chrome()
-
     elif browser == 'firefox' or browser == 'Firefox':
         driver = Firefox()
-
     request.instance.driver = driver
     yield driver
     driver.quit()
@@ -65,12 +62,9 @@ def _get_test_func(obj):
 def take_failed_ss(driver):
     curdir = os.getcwd()
     directory = curdir + '/screenshots'
-
     if not os.path.exists(directory):
         os.makedirs(directory)
-
     count = 1
-
     while True:
         if not os.path.exists(directory + '/img' + str(count) + '.png'):
             ss_name = '/img' + str(count) + '.png'
