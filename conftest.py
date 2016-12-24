@@ -40,7 +40,7 @@ def driver(request):
     if browser == 'chrome' or browser == 'Chrome':
         driver = webdriver.Chrome()
     elif browser == 'firefox' or browser == 'Firefox':
-        driver = Firefox()
+        driver = webdriver.Firefox()
     request.instance.driver = driver
     yield driver
     driver.quit()
